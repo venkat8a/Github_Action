@@ -20,8 +20,6 @@ jobs:
       with:
         host: http://3.109.152.54:9000
         login: f761a12cc67adeac4fb6fa237358ea840ce4962e
-    - name: Check out code
-      uses: actions/checkout@v2
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
