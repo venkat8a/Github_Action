@@ -1,23 +1,3 @@
-https://github.com/marketplace/actions/sonarqube-scan
-
-
-1. Created Github Repo as github-actions
-      repo snap 
-2. Push the code base for python
-      github snap
-3. Created Dockerfile and pushed
-      dockerfile snap
-4. created sonar-project.properties and pushed to repo. Then configure sonar scanning stage in yamal file.
-     sonar-project.properties snap
-5. Created github/workflow and written yaml file to scan the code build the docker image and deploy to ECR
-     github code snap
-6. Create IAM user, added ECR Policy and generate secrect key and secret acceess key and configure in github workflow yaml file.
-      user screenshot
-8. Create ECR registry, configure repo name, registry name and configure Imge Tag in github action workflow yaml file.
-     Yamal Tag
-9. Then filenally create docker image post soanr scanning and deploy it in ECR.
-     ECR snapshot
-
 name: Deploy to ECR
 
 on:
@@ -25,8 +5,6 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
-name: SonarQube Scan
 jobs:
   sonarqube:
     name: SonarQube Trigger
