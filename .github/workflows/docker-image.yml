@@ -32,7 +32,7 @@ jobs:
       env:
         ECR_REGISTRY: 124414058015.dkr.ecr.ap-south-1.amazonaws.com
         ECR_REPOSITORY: testreg
-        IMAGE_TAG: Test_Github_1.1
+        IMAGE_TAG: Test_Github_1.2
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
