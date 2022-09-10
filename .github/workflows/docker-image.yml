@@ -20,7 +20,6 @@ jobs:
       with:
         host: http://3.109.152.54:9000
         login: f761a12cc67adeac4fb6fa237358ea840ce4962e
-    - uses: actions/checkout@v3
     - name: Check out code
       uses: actions/checkout@v2
     
