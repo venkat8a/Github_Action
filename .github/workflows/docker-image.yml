@@ -1,3 +1,23 @@
+https://github.com/marketplace/actions/sonarqube-scan
+
+
+1. Created Github Repo as github-actions
+      repo snap 
+2. Push the code base for python
+      github snap
+3. Created Dockerfile and pushed
+      dockerfile snap
+4. created sonar-project.properties and pushed to repo. Then configure sonar scanning stage in yamal file.
+     sonar-project.properties snap
+5. Created github/workflow and written yaml file to scan the code build the docker image and deploy to ECR
+     github code snap
+6. Create IAM user, added ECR Policy and generate secrect key and secret acceess key and configure in github workflow yaml file.
+      user screenshot
+8. Create ECR registry, configure repo name, registry name and configure Imge Tag in github action workflow yaml file.
+     Yamal Tag
+9. Then filenally create docker image post soanr scanning and deploy it in ECR.
+     ECR snapshot
+
 name: Deploy to ECR
 
 on:
@@ -6,9 +26,23 @@ on:
   pull_request:
     branches: [ "main" ]
 
+name: SonarQube Scan
 jobs:
-
-  build:
+  sonarqube:
+    name: SonarQube Trigger
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checking out
+      uses: actions/checkout@main
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@v1.2.0
+      with:
+        host: http://3.109.152.54:9000
+        login: f761a12cc67adeac4fb6fa237358ea840ce4962e
+	build:
 
     runs-on: ubuntu-latest
 
@@ -32,7 +66,7 @@ jobs:
       env:
         ECR_REGISTRY: 124414058015.dkr.ecr.ap-south-1.amazonaws.com
         ECR_REPOSITORY: testreg
-        IMAGE_TAG: Test_Github_1.2
+        IMAGE_TAG: Test_Github_1.3
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
